@@ -1,0 +1,13 @@
+.sidebar-sort {
+  width: 130px;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.sort {
+  height: 35px;
+  flex: 1 0 100px;
+}

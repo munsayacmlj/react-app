@@ -1,0 +1,12 @@
+.landing-section {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.book-detail {
+  width: 90%;
+  margin: 0 auto;
+}

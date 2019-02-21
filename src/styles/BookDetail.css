@@ -1,0 +1,58 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #1e1e21;
+}
+
+.close-modal {
+  float: right;
+}
+
+.book-modal-content {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255);
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  max-width: 600px;
+  max-height: 400px;
+  margin: auto;
+}
+
+.book-modal-content__body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.book-modal-content__body input {
+  padding: 5px 5px 0 5px;
+}
+
+.book-modal-content__title *,
+.book-modal-content__author *,
+.book-modal-content__rating *,
+.book-modal-content__description{
+  display: block;
+}
+
+.book-modal-content__title,
+.book-modal-content__author,
+.book-modal-content__rating,
+.book-modal-content__description{
+  margin-bottom: 30px;
+}
+
+.book-modal-content__rating input {
+  max-width: 100px;
+}
