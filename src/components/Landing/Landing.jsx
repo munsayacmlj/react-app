@@ -9,25 +9,15 @@ class Landing extends Component {
  
   constructor(props) {
     super(props);
-
-    console.log("Landing constructor");
-  }
-
-  componentDidUpdate = (prevProps, prevState) => {
-    // const { querySort } = QueryString.parse(this.props.location.search);
-    // const prevQuerySort = QueryString.parse(prevProps.location.search).querySort;
-    // if (prevQuerySort !== querySort) {
-    //   this.props.sendSortType(querySort);
-    // }
   }
 
   render () {
     const { url } = this.props.match;
     const { sendData, books, sendSortType } = this.props;
+    
     const bookArr = books.map(
-      (elem, index) => <Book key={index} url={url} details={elem} sendData={sendData}/> 
-      );
-    console.log("Landing Render", books);
+      (elem, index) => <Book key={index} url={url} id={elem.id} details={elem.fields} sendData={sendData}/> 
+    );
 
     return(
     <React.Fragment>
