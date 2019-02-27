@@ -15,43 +15,40 @@ class App extends Component {
       books: [],
       bookDetails: {}
     }
-
-    this.getSortType = this.getSortType.bind(this);
-    console.log("App constructor");
   }
 
   compare = (type) => {
     return (a, b) => {
       switch (type) {
         case 'aToZ' :
-          if (a.title < b.title) {
+          if (a.fields.title < b.fields.title) {
             return -1;
           } 
-          if (a.title > b.title) {
+          if (a.fields.title > b.fields.title) {
             return 1;
           }
           break;
         case 'zToA' :
-          if (a.title < b.title) {
+          if (a.fields.title < b.fields.title) {
             return 1;
           } 
-          if (a.title > b.title) {
+          if (a.fields.title > b.fields.title) {
             return -1;
           }
           break;
         case 'ratingASC' :
-          if (a.rating < b.rating) {
+          if (a.fields.rating < b.fields.rating) {
             return -1;
           }
-          if (a.rating > b.rating) {
+          if (a.fields.rating > b.fields.rating) {
             return 1;
           }
           break;
         case 'ratingDESC' :
-          if (a.rating < b.rating) {
+          if (a.fields.rating < b.fields.rating) {
             return 1;
           }
-          if (a.rating > b.rating) {
+          if (a.fields.rating > b.fields.rating) {
             return -1;
           }
           break;
@@ -62,9 +59,9 @@ class App extends Component {
   }
   
 
-  getSortType(type) {
+  getSortType = (type) => {
     const { books } = this.state;
-  
+    
     let promise1 = new Promise( (resolve, reject) => {
       if (Object.entries(books).length !== 0) {
         resolve("Data Available!");
@@ -90,44 +87,23 @@ class App extends Component {
 
   fetchBooks = async () => {
     console.log("Getting Data");
-    const books = [];
     
-    var base = new Airtable({apiKey: 'key7D0jCBOHkuAmkv'}).base('appNcFuYsJ1L69Jt2');
-    base('Table 1').select({
-      maxRecords: 10,
-      view: "Grid view"
-    }).eachPage(function page(records, fetchNextPage) {
-      records.forEach(function(record) {
-        let obj = record.fields;
-        // obj[`id`] = record.id;
-        books.push(obj);
-      });
-      
-      // To fetch the next page of records, call `fetchNextPage`.
-      // If there are more records, `page` will get called again.
-      // If there are no more records, `done` will get called.
-      fetchNextPage();
-      
-    }, function done(err) {
-      if (err) { console.error(err); return; }
-    });
-
-    console.log("App books:", books.length);
-    books.forEach((elem) => {
-      console.log(elem);
-    });
-    await this.setState({ books: books });
+    const response = await fetch(
+      'https://api.airtable.com/v0/appNcFuYsJ1L69Jt2/Table%201',
+      {
+        headers: {
+          'Authorization': 'Bearer key7D0jCBOHkuAmkv'
+        }
+      }
+    );
+    const { records } = await response.json();
+    this.setState({ books: records });
   }
   
   componentDidMount() {
     this.fetchBooks();
   }  
-
-  componentDidUpdate = (prevProps, prevState) => {
-    console.log("App CDU", this.state.books.length);
-  }
   
-
   render() {
     const Home = (props) => {
       return (
