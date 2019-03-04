@@ -17,91 +17,94 @@ class App extends Component {
     }
   }
 
-  compare = (type) => {
-    return (a, b) => {
-      switch (type) {
-        case 'aToZ' :
-          if (a.fields.title < b.fields.title) {
-            return -1;
-          } 
-          if (a.fields.title > b.fields.title) {
-            return 1;
-          }
-          break;
-        case 'zToA' :
-          if (a.fields.title < b.fields.title) {
-            return 1;
-          } 
-          if (a.fields.title > b.fields.title) {
-            return -1;
-          }
-          break;
-        case 'ratingASC' :
-          if (a.fields.rating < b.fields.rating) {
-            return -1;
-          }
-          if (a.fields.rating > b.fields.rating) {
-            return 1;
-          }
-          break;
-        case 'ratingDESC' :
-          if (a.fields.rating < b.fields.rating) {
-            return 1;
-          }
-          if (a.fields.rating > b.fields.rating) {
-            return -1;
-          }
-          break;
-        default:
-          return 0;
-      }
-    }
-  }
+  // compare = (type) => {
+  //   return (a, b) => {
+  //     switch (type) {
+  //       case 'aToZ' :
+  //         if (a.fields.title < b.fields.title) {
+  //           return -1;
+  //         } 
+  //         if (a.fields.title > b.fields.title) {
+  //           return 1;
+  //         }
+  //         break;
+  //       case 'zToA' :
+  //         if (a.fields.title < b.fields.title) {
+  //           return 1;
+  //         } 
+  //         if (a.fields.title > b.fields.title) {
+  //           return -1;
+  //         }
+  //         break;
+  //       case 'ratingASC' :
+  //         if (a.fields.rating < b.fields.rating) {
+  //           return -1;
+  //         }
+  //         if (a.fields.rating > b.fields.rating) {
+  //           return 1;
+  //         }
+  //         break;
+  //       case 'ratingDESC' :
+  //         if (a.fields.rating < b.fields.rating) {
+  //           return 1;
+  //         }
+  //         if (a.fields.rating > b.fields.rating) {
+  //           return -1;
+  //         }
+  //         break;
+  //       default:
+  //         return 0;
+  //     }
+  //   }
+  // }
   
-
-  getSortType = (type) => {
-    const { books } = this.state;
-    
-    let promise1 = new Promise( (resolve, reject) => {
-      if (Object.entries(books).length !== 0) {
-        resolve("Data Available!");
-      }
-
-      if (Object.entries(books).length === 0) {
-        reject("Data not Available!");
-      }
-    });
-
-    promise1.then((message) => {
-      console.log(message);
-      books.sort(this.compare(type));
-      this.setState({books: books});
-    }).catch((message) => {
-      console.log(message);
-    });
+  getBooks = (books) => {
+    this.setState({books: books});
   }
+
+  // getSortType = (type) => {
+  //   const { books } = this.state;
+    
+  //   let promise1 = new Promise( (resolve, reject) => {
+  //     if (Object.entries(books).length !== 0) {
+  //       resolve("Data Available!");
+  //     }
+
+  //     if (Object.entries(books).length === 0) {
+  //       reject("Data not Available!");
+  //     }
+  //   });
+
+  //   promise1.then((message) => {
+  //     console.log(message);
+  //     books.sort(this.compare(type));
+  //     this.setState({books: books});
+  //   }).catch((message) => {
+  //     console.log(message);
+  //   });
+  // }
 
   getBookDetails = (details) => {
     this.setState({ bookDetails: details });
   }
 
-  fetchBooks = async () => {
-    console.log("Getting Data");
+  // fetchBooks = async () => {
+  //   console.log("Getting Data");
     
-    const response = await fetch(
-      'https://api.airtable.com/v0/appNcFuYsJ1L69Jt2/Table%201',
-      {
-        headers: {
-          'Authorization': 'Bearer key7D0jCBOHkuAmkv'
-        }
-      }
-    );
-    const { records } = await response.json();
-    this.setState({ books: records });
-  }
+  //   const response = await fetch(
+  //     'https://api.airtable.com/v0/appNcFuYsJ1L69Jt2/Table%201',
+  //     {
+  //       headers: {
+  //         'Authorization': 'Bearer key7D0jCBOHkuAmkv'
+  //       }
+  //     }
+  //   );
+  //   const { records } = await response.json();
+  //   this.setState({ books: records });
+  // }
   
   componentDidMount() {
-    this.fetchBooks();
+    // this.fetchBooks();
   }  
   
   render() {
@@ -124,7 +127,6 @@ class App extends Component {
       return (
         <Landing 
           sendData={this.getBookDetails}
-          sendSortType={this.getSortType}
           books={this.state.books}
           {...props}
         />
