@@ -110,12 +110,12 @@ class Landing extends Component {
         Books
       </div>
       <section className="landing-section">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<h3>Loading... </h3>}>
           <div className="books-landing">
             {bookArr}
           </div>
           <Sidebar sendSortType={this.getSortType}/>
-        </Suspense> 
+        </Suspense>
       </section>
     </React.Fragment>
     );
