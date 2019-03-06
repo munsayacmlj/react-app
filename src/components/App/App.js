@@ -4,6 +4,7 @@ import '../../styles/App.css';
 const Header = lazy(() => import('../Header/Header'));
 const Landing = lazy(() => import('../Landing/Landing'));
 const BookDetail = lazy(() => import('../BookDetail/BookDetail'));
+const Login = lazy(() => import('../Login/Login'));
 
 class App extends Component {
 
@@ -50,6 +51,14 @@ class App extends Component {
       );
     }
 
+    const LoginPage = (props) => {
+      return (
+        <Login 
+          {...props}
+        />
+      );
+    }
+
     return (
       <main>
         <Router>
@@ -59,6 +68,7 @@ class App extends Component {
               <Route exact path="/" render={Home}/>
               <Route exact path="/books/:bookTitle" render={BookProfile}/>
               <Route path="/books" render={BooksLanding} />
+              <Route exact path="/login" render={LoginPage} />
             </Switch>
           </Suspense>
         </Router>

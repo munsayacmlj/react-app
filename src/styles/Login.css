@@ -1,0 +1,20 @@
+.login-form {
+  width: 300px;
+  height: 250px;
+  padding: 20px;
+  background-color: #e0e0e0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-form__containers {
+  margin: 25px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form__containers:first-child {
+  margin-top: 0;
+}

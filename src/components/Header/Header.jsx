@@ -19,6 +19,9 @@ class Header extends Component {
             <NavLink exact to="/books?querySort=default" activeStyle={activeStyle}>Books</NavLink>
           </li>
         </ul>
+        <div className="login">
+          <NavLink exact to="/login">Login</NavLink>
+        </div>
       </header>
     );
   }

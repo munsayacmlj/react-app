@@ -13,19 +13,22 @@ class Landing extends Component {
     }
   }
 
-  fetchBooks = async () => {
+  fetchBooks = () => {
     console.log("Getting Data");
-    
-    const response = await fetch(
+    fetch(
       'https://api.airtable.com/v0/appNcFuYsJ1L69Jt2/Table%201',
       {
         headers: {
           'Authorization': 'Bearer key7D0jCBOHkuAmkv'
         }
       }
-    );
-    const { records } = await response.json();
-    this.setState({ books: records });
+    ).then(response => {
+      return response.json();
+    }).then(myJSON => {
+      const { records } = myJSON;
+      this.setState({ books: records });
+      console.log("Fetch successful");
+    });
   }
   
   componentDidMount() {
